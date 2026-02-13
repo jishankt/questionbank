@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | SFI QuestionBank</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .register-container {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1abc9c;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        label {
+            font-weight: 500;
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        input:focus, select:focus {
+            border-color: #1abc9c;
+            outline: none;
+            box-shadow: 0 0 5px rgba(26,188,156,0.4);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: linear-gradient(90deg, #1abc9c, #16a085);
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .helptext {
+            display: none;
+        }
+
+        .errorlist {
+            color: red;
+            list-style: none;
+            padding: 0;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 420px) {
+            .register-container {
+                padding: 25px 15px;
+            }
+            h2 {
+                font-size: 18px;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="register-container">
+
+    <div class="logo">📘 SFI QuestionBank</div>
+    <h2>Student Registration</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- USER FORM -->
+        {{ form.username.label_tag }}
+        {{ form.username.errors }}
+        {{ form.username }}
+
+        {{ form.email.label_tag }}
+        {{ form.email.errors }}
+        {{ form.email }}
+
+        {{ form.password1.label_tag }}
+        {{ form.password1.errors }}
+        {{ form.password1 }}
+
+        {{ form.password2.label_tag }}
+        {{ form.password2.errors }}
+        {{ form.password2 }}
+
+        <!-- PROFILE FORM -->
+        {{ profile_form.class_name.label_tag }}
+        {{ profile_form.class_name.errors }}
+        {{ profile_form.class_name }}
+
+        {{ profile_form.school_name.label_tag }}
+        {{ profile_form.school_name.errors }}
+        {{ profile_form.school_name }}
+
+        <button type="submit">Register</button>
+
+    </form>
+
+    <div class="login-link">
+        Already registered? <a href="{% url 'login' %}">Login here</a>
+    </div>
+
+</div>
+
+</body>
+</html>

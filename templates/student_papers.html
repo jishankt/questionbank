@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ subject }} Papers | SFI QuestionBank</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            font-family: 'Poppins', sans-serif;
+            margin:0;
+            background:#f5f7fa;
+        }
+
+        /* NAVBAR */
+        nav{
+            background:#2c3e50;
+            padding:15px 20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        nav h2{
+            color:#1abc9c;
+            margin:0;
+            font-size:18px;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin-left:15px;
+            font-weight:500;
+            font-size:14px;
+            transition:0.3s;
+        }
+
+        nav a:hover{
+            color:#4fc3f7;
+        }
+
+        /* PAGE TITLE */
+        .title{
+            text-align:center;
+            padding:20px 15px;
+            color:#2c3e50;
+        }
+
+        /* BACK BUTTON */
+        .back-btn{
+            display:block;
+            width:max-content;
+            margin:0 auto 20px auto;
+            padding:10px 20px;
+            background:#3498db;
+            color:white;
+            text-decoration:none;
+            border-radius:25px;
+            font-weight:500;
+            transition:0.3s;
+        }
+
+        .back-btn:hover{
+            opacity:0.85;
+        }
+
+        /* PAPER GRID */
+        .paper-container{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:20px;
+            padding:0 15px 30px 15px;
+        }
+
+        .paper-card{
+            background:white;
+            width:220px;
+            padding:15px;
+            border-radius:12px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            text-align:center;
+            transition:0.3s;
+        }
+
+        .paper-card:hover{
+            transform:translateY(-5px);
+            box-shadow:0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .paper-card h3{
+            color:#2c3e50;
+            margin-bottom:5px;
+            font-size:16px;
+        }
+
+        .paper-card p{
+            font-size:14px;
+            color:#555;
+            margin-bottom:10px;
+        }
+
+        .btn{
+            display:inline-block;
+            margin:5px 5px 0 5px;
+            padding:8px 15px;
+            border-radius:25px;
+            text-decoration:none;
+            color:white;
+            font-size:13px;
+            transition:0.3s;
+        }
+
+        .view-btn{
+            background:#3498db;
+        }
+
+        .download-btn{
+            background:#1abc9c;
+        }
+
+        .btn:hover{
+            opacity:0.85;
+        }
+
+        .empty{
+            text-align:center;
+            color:gray;
+            margin-top:40px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 500px){
+            nav{
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav div{
+                margin-top:10px;
+            }
+            .paper-card{
+                width:100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <h2>📘 SFI QuestionBank</h2>
+    <div>
+        <a href="{% url 'paper_list' %}">Subjects</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</nav>
+
+<!-- PAGE TITLE -->
+<div class="title">
+    <h1>{{ subject }} Question Papers</h1>
+</div>
+
+<!-- BACK BUTTON -->
+<a class="back-btn" href="{% url 'paper_list' %}">⬅ Back to Subjects</a>
+
+<!-- PAPERS -->
+<div class="paper-container">
+
+{% for paper in papers %}
+    <div class="paper-card">
+        <h3>{{ paper.subject.name }}</h3>
+        <p>Year : {{ paper.year }}</p>
+
+        <a class="btn view-btn" href="{{ paper.pdf_file.url }}" target="_blank">View</a>
+        <a class="btn download-btn" href="{{ paper.pdf_file.url }}" download>Download</a>
+    </div>
+{% empty %}
+    <p class="empty">No papers uploaded yet.</p>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

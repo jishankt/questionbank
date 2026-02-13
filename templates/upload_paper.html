@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Question Paper | SFI QuestionBank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav {
+            background: #1e3a5f;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav h2 {
+            color: white;
+            margin: 0;
+            font-size: 22px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #4fc3f7;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            margin-top: 100px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e3a5f;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #333;
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #1abc9c;
+            outline: none;
+            box-shadow: 0 0 5px rgba(26, 188, 156, 0.4);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg,#1abc9c,#16a085);
+            border: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-link, .back-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 15px;
+            color: #1e3a5f;
+            border: 1px solid #1e3a5f;
+            padding: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover, .back-btn:hover {
+            color: white;
+            background: #1e3a5f;
+        }
+
+        .errorlist {
+            color: #e53935;
+            list-style: none;
+            padding: 0;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <h2>📚 SFI QuestionBank</h2>
+    <div>
+        <a href="/papers/dashboard/">Dashboard</a>
+        <a href="/accounts/logout/">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- BACK BUTTON -->
+    <a class="back-btn" href="/papers/dashboard/">
+        ⬅ Back to Dashboard
+    </a>
+
+    <h2>Upload Question Paper</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- SUBJECT -->
+        <label>Subject</label>
+        {% if subjects %}
+        <select name="subject" required>
+            <option value="">Select Subject</option>
+            {% for sub in subjects %}
+                <option value="{{ sub.id }}">
+                    {{ sub.name }} (Class {{ sub.class_name }})
+                </option>
+            {% endfor %}
+        </select>
+        {% else %}
+            <p>No subjects available. Please add subjects first.</p>
+        {% endif %}
+
+        <!-- YEAR -->
+        <label>Year</label>
+        <input type="number" name="year" placeholder="Enter Year (Ex: 2025)" min="2000" max="2100" required>
+
+        <!-- PDF FILE -->
+        <label>Upload PDF</label>
+        <input type="file" name="pdf_file" accept=".pdf" required>
+
+        <button type="submit">Upload Paper</button>
+    </form>
+
+</div>
+
+</body>
+</html>

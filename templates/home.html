@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFI QuestionBank</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* RESET */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #eef2f3;
+            color: #2c3e50;
+            line-height: 1.5;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: #203a43;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #1abc9c;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #1abc9c;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #16a085;
+            transform: scale(1.05);
+        }
+
+        /* CLASS CARDS */
+        .classes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .card form button {
+            width: 100%;
+            padding: 10px;
+            background: #1abc9c;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .card form button:hover {
+            background: #16a085;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 15px 10px;
+            font-size: 12px;
+            color: #fff;
+            background: #203a43;
+            margin-top: 20px;
+        }
+
+        /* RESPONSIVE */
+        @media (min-width: 600px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            .classes {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .card {
+                width: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">📘 SFI QuestionBank</div>
+    <div>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'paper_list' %}">Papers</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>📚 Welcome to SFI QuestionBank</h1>
+    <p>Your Smart Learning Platform for Previous Year Question Papers</p>
+    <a class="btn" href="{% url 'register' %}">Get Started</a>
+</div>
+
+<!-- CLASS CARDS -->
+<div class="classes">
+
+    <!-- 10th -->
+    <div class="card">
+        <h3>10th Standard</h3>
+        <form method="POST" action="{% url 'paper_list' %}">
+            {% csrf_token %}
+            <input type="hidden" name="class" value="10">
+            <button type="submit">View Papers</button>
+        </form>
+    </div>
+
+    <!-- 11th -->
+    <div class="card">
+        <h3>11th Standard</h3>
+        <form method="POST" action="{% url 'paper_list' %}">
+            {% csrf_token %}
+            <input type="hidden" name="class" value="11">
+            <button type="submit">View Papers</button>
+        </form>
+    </div>
+
+    <!-- 12th -->
+    <div class="card">
+        <h3>12th Standard</h3>
+        <form method="POST" action="{% url 'paper_list' %}">
+            {% csrf_token %}
+            <input type="hidden" name="class" value="12">
+            <button type="submit">View Papers</button>
+        </form>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    © 2026 SFI QuestionBank | Learning Made Easy
+</footer>
+
+</body>
+</html>
