@@ -4,7 +4,8 @@ from .forms import RegisterForm, ProfileForm
 from django.shortcuts import render
 
 def home(request):
-    return render(request, 'home.html')
+    classes = ["10", "11", "12"]
+    return render(request, 'home.html', {'classes': classes})
 
 
 def register(request):
