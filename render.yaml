@@ -1,9 +1,6 @@
 services:
   - type: web
-    name: questionbank
+    name: qbank
     env: python
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: "./build.sh"
     startCommand: "gunicorn questionbank.wsgi:application"
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11
