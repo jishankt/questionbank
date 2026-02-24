@@ -1,0 +1,103 @@
+{% extends "papers/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block extra_css %}
+<style>
+
+/* Page Title */
+.page-title{
+    text-align:center;
+    font-weight:600;
+    margin-bottom:25px;
+    letter-spacing:0.5px;
+}
+
+/* Class Card */
+.class-card{
+    text-decoration:none;
+}
+
+.class-box{
+    padding:30px 20px;
+    text-align:center;
+    border-radius:18px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    border:1px solid rgba(255,255,255,0.12);
+    transition:0.35s;
+    color:white;
+}
+
+/* Hover Glow */
+.class-box:hover{
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:0 0 30px rgba(91,140,255,0.4);
+}
+
+/* Class Number Style */
+.class-number{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:10px;
+    background: linear-gradient(45deg,#5b8cff,#7b2ff7);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* Button Style */
+.view-btn{
+    margin-top:15px;
+    border-radius:30px;
+    padding:10px 22px;
+    font-size:14px;
+}
+
+/* Mobile Optimization */
+@media(max-width:768px){
+
+    .class-box{
+        padding:35px 15px;
+    }
+
+    .class-number{
+        font-size:24px;
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h3 class="page-title">📘 Select Your Class</h3>
+
+<div class="row g-4 justify-content-center">
+
+    {% for c in classes %}
+    <div class="col-12 col-sm-6 col-md-4">
+
+        <a href="{% url 'subjects' c %}" class="class-card">
+            <div class="class-box">
+
+                <div class="class-number">
+                    Class {{ c }}
+                </div>
+
+                <p class="mb-2 opacity-75">
+                    View Question Papers
+                </p>
+
+                <span class="btn btn-primary view-btn">
+                    Open →
+                </span>
+
+            </div>
+        </a>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

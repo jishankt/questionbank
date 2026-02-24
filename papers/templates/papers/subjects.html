@@ -1,0 +1,99 @@
+{% extends "papers/base.html" %}
+
+{% block extra_css %}
+<style>
+
+/* Heading */
+.subject-heading{
+    text-align:center;
+    font-weight:600;
+    margin-bottom:25px;
+}
+
+/* Subject Card */
+.subject-card{
+    padding:30px 15px;
+    border-radius:18px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(14px);
+    border:1px solid rgba(255,255,255,0.12);
+    transition:0.35s;
+    color:white;
+    height:100%;
+}
+
+/* Glow Hover */
+.subject-card:hover{
+    transform: translateY(-8px) scale(1.03);
+    box-shadow:0 0 28px rgba(91,140,255,0.4);
+}
+
+/* Subject Name */
+.subject-name{
+    font-size:20px;
+    font-weight:600;
+    letter-spacing:0.5px;
+    background: linear-gradient(45deg,#5b8cff,#7b2ff7);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* Empty Message */
+.empty-msg{
+    text-align:center;
+    margin-top:40px;
+    opacity:0.85;
+}
+
+/* Mobile Optimization */
+@media(max-width:768px){
+
+    .subject-card{
+        padding:35px 10px;
+    }
+
+    .subject-name{
+        font-size:18px;
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h3 class="subject-heading">
+    📚 Class {{ class_no }} Subjects
+</h3>
+
+<div class="row g-4 justify-content-center">
+
+{% for s in subjects %}
+<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+    <a href="{% url 'papers' s.id %}" style="text-decoration:none;">
+
+        <div class="subject-card text-center">
+
+            <div class="subject-name">
+                {{ s.name }}
+            </div>
+
+        </div>
+
+    </a>
+
+</div>
+
+{% empty %}
+
+<div class="empty-msg">
+    <h5>No subjects available 📭</h5>
+    <p>Please check again later.</p>
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
