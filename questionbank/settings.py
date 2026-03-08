@@ -109,7 +109,7 @@ SUPABASE_BUCKET = os.getenv("SUPABASE_BUCKET")     # e.g. question-papers
 # ── CORS ──────────────────────────────────────────────────────────────────────
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://qbank-frontend.vercel.app",  # ← add your Vercel URL
+    "https://sfiquestionbank.vercel.app",  # ← add your Vercel URL
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 
