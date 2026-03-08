@@ -3,6 +3,14 @@ from django.contrib.auth.models import User
 from papers.supabase_storage import SupabaseStorage
 
 
+def get_supabase_storage():
+    from papers.supabase_storage import SupabaseStorage
+    return SupabaseStorage()
+
+
+
+
+
 class ClassLevel(models.Model):
     name = models.CharField(max_length=50)
 
@@ -36,7 +44,7 @@ class QuestionPaper(models.Model):
     # to FileSystemStorage via lazy DefaultStorage caching
     pdf = models.FileField(
         upload_to="question_papers/",
-        storage=SupabaseStorage()
+        storage=get_supabase_storage  # ← no parentheses, pass function not instance
     )
 
     uploaded_by = models.ForeignKey(
@@ -54,7 +62,22 @@ class QuestionPaper(models.Model):
 
 
 class VisitorCount(models.Model):
-    count = models.IntegerField(default=0)
+    count = models.PositiveBigIntegerField(default=0)
+
+    class Meta:
+        verbose_name = "Visitor Count"
 
     def __str__(self):
-        return f"Visitors: {self.count}"
+        return f"Total Visitors: {self.count}"
+
+    @classmethod
+    def increment(cls):
+        obj, _ = cls.objects.get_or_create(id=1)
+        obj.count += 1
+        obj.save()
+        return obj.count
+
+    @classmethod
+    def get_count(cls):
+        obj, _ = cls.objects.get_or_create(id=1)
+        return obj.count

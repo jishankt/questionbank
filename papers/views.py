@@ -15,14 +15,19 @@ from .serializers import (
 # =====================================
 # GET ALL CLASSES
 # =====================================
-@api_view(['GET'])
-def visitor_count(request):
+@api_view(["GET"])
+def get_visitor_count(request):
+    """Return current visitor count without incrementing."""
+    from .models import VisitorCount
+    return Response({"count": VisitorCount.get_count()})
 
-    counter, created = VisitorCount.objects.get_or_create(id=1)
-    counter.count += 1
-    counter.save()
 
-    return Response({"visitors": counter.count})
+@api_view(["POST"])
+def increment_visitor(request):
+    """Increment visitor count and return new value."""
+    from .models import VisitorCount
+    count = VisitorCount.increment()
+    return Response({"count": count})
 
 @api_view(["GET"])
 def get_classes(request):
