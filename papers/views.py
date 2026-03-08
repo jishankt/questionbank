@@ -17,17 +17,15 @@ from .serializers import (
 # =====================================
 @api_view(["GET"])
 def get_visitor_count(request):
-    """Return current visitor count without incrementing."""
     from .models import VisitorCount
-    return Response({"count": VisitorCount.get_count()})
+    return Response({"count": int(VisitorCount.get_count())})
 
 
 @api_view(["POST"])
 def increment_visitor(request):
-    """Increment visitor count and return new value."""
     from .models import VisitorCount
     count = VisitorCount.increment()
-    return Response({"count": count})
+    return Response({"count": int(count)})
 
 @api_view(["GET"])
 def get_classes(request):
@@ -109,3 +107,8 @@ def upload_paper(request):
         serializer.errors,
         status=status.HTTP_400_BAD_REQUEST
     )
+
+@api_view(["GET"])
+def paper_count(request):
+    from .models import QuestionPaper
+    return Response({"count": QuestionPaper.objects.count()})

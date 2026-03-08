@@ -15,4 +15,6 @@ urlpatterns = [
 
     path("visitors/increment/", views.increment_visitor),
 
+    path("papers/count/", views.paper_count),
+
 ]
