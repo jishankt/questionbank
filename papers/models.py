@@ -48,3 +48,13 @@ class QuestionPaper(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.year}"
+
+
+
+
+
+class VisitorCount(models.Model):
+    count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Visitors: {self.count}"

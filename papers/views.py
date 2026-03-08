@@ -2,6 +2,7 @@ from rest_framework.decorators import api_view, parser_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
+from .models import VisitorCount
 
 from .models import ClassLevel, Subject, QuestionPaper
 from .serializers import (
@@ -14,6 +15,14 @@ from .serializers import (
 # =====================================
 # GET ALL CLASSES
 # =====================================
+@api_view(['GET'])
+def visitor_count(request):
+
+    counter, created = VisitorCount.objects.get_or_create(id=1)
+    counter.count += 1
+    counter.save()
+
+    return Response({"visitors": counter.count})
 
 @api_view(["GET"])
 def get_classes(request):

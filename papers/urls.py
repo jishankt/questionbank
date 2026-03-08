@@ -11,4 +11,6 @@ urlpatterns = [
 
     path("upload-paper/", views.upload_paper),
 
+    path("visitors/", views.visitor_count),
+
 ]
