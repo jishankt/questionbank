@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from papers.supabase_storage import SupabaseStorage
 
 
 class ClassLevel(models.Model):
@@ -30,8 +31,19 @@ class QuestionPaper(models.Model):
 
     title = models.CharField(max_length=200)
     year = models.IntegerField()
-    pdf = models.FileField(upload_to="question_papers/")
-    uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    # FIX: Explicitly pass SupabaseStorage so Django doesn't fall back
+    # to FileSystemStorage via lazy DefaultStorage caching
+    pdf = models.FileField(
+        upload_to="question_papers/",
+        storage=SupabaseStorage()
+    )
+
+    uploaded_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True
+    )
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

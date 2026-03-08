@@ -2,7 +2,13 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.home, name="home"),
-    path("class/<int:class_no>/", views.subjects, name="subjects"),
-    path("subject/<int:subject_id>/", views.papers, name="papers"),
+
+    path("classes/", views.get_classes),
+
+    path("subjects/<int:class_id>/", views.get_subjects),
+
+    path("papers/<int:subject_id>/", views.get_papers),
+
+    path("upload-paper/", views.upload_paper),
+
 ]
